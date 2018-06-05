@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  flask-app:
+    build: .
+    command: python3 /opt/app.py
+    ports:
+      - "8080:5000"
+    networks:
+      - front-tier
+    depends_on:
+      - flask-mysql
+  flask-mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: Lakshmi@123
+    networks:
+      - front-tier
+networks:
+  front-tier:
