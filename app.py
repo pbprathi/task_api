@@ -5,8 +5,8 @@ app=Flask(__name__)
 
 SQLALCHEMY_DATABASE_URI = "mysql://{username}:{password}@{hostname}/{databasename}".format(
     username="root",
-    password="XXXXX",
-    hostname="flask-mysql",
+    password="XXXX",
+    hostname="localhost",
     databasename="todo",
 )
 
@@ -15,12 +15,21 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 
 db=SQLAlchemy(app)
 
+
 class Tasks(db.Model):
+    __tablename__ = 'tasks'
     task_id=db.Column(db.Integer,primary_key=True)
     taskname=db.Column(db.String(150))
     status=db.Column(db.Boolean)
 
-db.create_all()
+
+#curl -i http://127.0.0.1:5000/createdb
+
+@app.route('/createdb',methods=['GET'])
+def create_db():
+    db.create_all()
+    return jsonify({'message':'Welcome'})
+
 
 #curl -i http://127.0.0.1:5000/tasks
 

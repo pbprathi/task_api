@@ -15,8 +15,11 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: todo
+      MYSQL_ROOT_PASSWORD: password
     networks:
       - front-tier
 networks:
   front-tier:
+
+  # Refeence https://littletechblogger.wordpress.com/2016/03/02/docker-how-to-create-a-custom-database-from-docker-mysql-image/
